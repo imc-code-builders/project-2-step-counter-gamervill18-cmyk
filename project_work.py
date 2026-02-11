@@ -4,8 +4,9 @@ STEP_THRESHOLD = 120
 
 
 def get_changes(magnitudes):
-    """Calculate changes between consecutive values.
 
+
+    """Calculate changes between consecutive values.
     Args:
         magnitudes: A list of acceleration readings in chronological order.
     Returns:
@@ -16,6 +17,11 @@ def get_changes(magnitudes):
     """
 
     changes = []
+
+    for i in range(len(magnitudes)-1):
+        x = magnitudes[i+1] - magnitudes[i]
+        changes.append(x)
+        
 
     # TODO: For each pair, calculate: next_value - current_value
 
@@ -59,7 +65,7 @@ def count_steps(magnitudes, threshold=STEP_THRESHOLD):
 
 if __name__ == "__main__":
     try:
-        times, magnitudes = read_csv("data/sample_data.csv")
+        times, magnitudes = read_csv("microbit.csv")
         step_count = count_steps(magnitudes)
         print(f"Loaded {len(magnitudes)} data points")
         print(f"Detected {step_count} steps")
